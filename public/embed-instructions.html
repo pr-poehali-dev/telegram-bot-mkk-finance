@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструкция по встраиванию формы на Tilda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #fff5eb 0%, #ffffff 50%, #f3e8ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f97316 0%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #f97316;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .step h3 {
+            color: #f97316;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            position: relative;
+        }
+        .code-block code {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .copy-btn:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+        }
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .note strong {
+            color: #d97706;
+        }
+        .preview-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #9333ea, #7e22ce);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        .preview-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
+        }
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Встраивание формы на Tilda</h1>
+        <p class="subtitle">Инструкция для установки формы "Жара Финансы" на ваш сайт</p>
+        <span class="badge">✨ Готовый код для встраивания</span>
+
+        <div class="step">
+            <h3>📋 Шаг 1: Скопируйте код</h3>
+            <p>Используйте этот iframe-код для встраивания формы на любую страницу Tilda:</p>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('code1')">Скопировать</button>
+                <code id="code1">&lt;iframe 
+  src="https://ваш-домен.poehali.dev/form" 
+  width="100%" 
+  height="900" 
+  frameborder="0" 
+  style="border: none; border-radius: 12px;"
+&gt;&lt;/iframe&gt;</code>
+            </div>
+            <div class="note">
+                <strong>⚠️ Важно:</strong> Замените <code>https://ваш-домен.poehali.dev</code> на реальный URL вашего опубликованного проекта
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>🎨 Шаг 2: Добавьте блок HTML в Tilda</h3>
+            <ul>
+                <li>Откройте редактор страницы в Tilda</li>
+                <li>Нажмите кнопку <strong>"+ Добавить блок"</strong></li>
+                <li>Найдите блок <strong>"T123 - HTML-код"</strong> или <strong>"Другое → HTML"</strong></li>
+                <li>Вставьте скопированный код в поле HTML</li>
+                <li>Сохраните и опубликуйте страницу</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>⚙️ Шаг 3: Настройте высоту (опционально)</h3>
+            <p>Если форма не помещается полностью, измените параметр <code>height</code>:</p>
+            <div class="code-block">
+                <code>height="900"  &lt;!-- Увеличьте до 1000-1200 при необходимости --&gt;</code>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>🎯 Альтернативный способ: Прямая ссылка</h3>
+            <p>Вы также можете использовать форму как отдельную страницу и добавить кнопку с прямой ссылкой:</p>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('code2')">Скопировать</button>
+                <code id="code2">https://ваш-домен.poehali.dev/form</code>
+            </div>
+            <p style="margin-top: 15px;">Просто добавьте кнопку в Tilda и укажите эту ссылку в настройках кнопки</p>
+        </div>
+
+        <div class="step">
+            <h3>✅ Что происходит после отправки?</h3>
+            <ul>
+                <li>🎉 Клиент видит экран "Заявка предварительно одобрена"</li>
+                <li>📞 Отображается сообщение "Ожидайте звонка"</li>
+                <li>🔢 Генерируется уникальный номер заявки (например, ZH-ABC123XYZ)</li>
+                <li>📊 Показываются детали: сумма, срок, сумма к возврату</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <strong>💡 Подсказка:</strong> Форма полностью адаптивна и отлично выглядит на всех устройствах — от смартфонов до десктопов
+        </div>
+
+        <a href="/form" class="preview-link" target="_blank">
+            👀 Посмотреть форму в действии →
+        </a>
+    </div>
+
+    <script>
+        function copyCode(elementId) {
+            const code = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Скопировано!';
+                btn.style.background = '#10b981';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#f97316';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
