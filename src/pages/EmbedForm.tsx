@@ -20,10 +20,41 @@ const EmbedForm = () => {
   const interestRate = 1.5;
   const totalAmount = Math.round(amount + (amount * interestRate * days / 100));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.fullName && formData.phone && formData.passport) {
-      setStep('approved');
+    if (!formData.fullName || !formData.phone || !formData.passport) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/a55b70da-7c1c-4713-80d1-fa5cdc622d7f', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          phone: formData.phone,
+          passport: formData.passport,
+          amount: amount,
+          days: days,
+          applicationId: applicationId,
+        }),
+      });
+
+      if (response.ok) {
+        setStep('approved');
+      } else {
+        alert('Ошибка отправки заявки. Попробуйте позже.');
+      }
+    } catch (error) {
+      alert('Ошибка соединения. Проверьте интернет.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
