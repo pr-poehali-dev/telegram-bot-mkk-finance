@@ -21,10 +21,14 @@ const EmbedForm = () => {
   const totalAmount = Math.round(amount + (amount * interestRate * days / 100));
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    
     if (!formData.fullName || !formData.phone || !formData.passport) {
+      setError('Заполните все обязательные поля');
       return;
     }
 
@@ -46,13 +50,15 @@ const EmbedForm = () => {
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setStep('approved');
       } else {
-        alert('Ошибка отправки заявки. Попробуйте позже.');
+        setError(result.error || 'Не удалось отправить заявку. Попробуйте позже.');
       }
-    } catch (error) {
-      alert('Ошибка соединения. Проверьте интернет.');
+    } catch (err) {
+      setError('Ошибка соединения. Проверьте интернет и попробуйте снова.');
     } finally {
       setIsSubmitting(false);
     }
@@ -238,12 +244,31 @@ const EmbedForm = () => {
             </div>
           </div>
 
+          {error && (
+            <Card className="p-4 bg-red-50 border-red-200">
+              <div className="flex items-center gap-2 text-red-600">
+                <Icon name="AlertCircle" size={20} />
+                <p className="text-sm font-medium">{error}</p>
+              </div>
+            </Card>
+          )}
+
           <Button 
             type="submit"
-            className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+            className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
-            Отправить заявку
-            <Icon name="Send" className="ml-2" />
+            {isSubmitting ? (
+              <>
+                <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
+                Отправка...
+              </>
+            ) : (
+              <>
+                Отправить заявку
+                <Icon name="Send" className="ml-2" size={20} />
+              </>
+            )}
           </Button>
 
           <p className="text-xs text-center text-muted-foreground">
